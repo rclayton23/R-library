@@ -1,0 +1,17 @@
+#!/usr/bin/env python3
+SERIAL_PORT = "COM6"  # change me
+BAUD        = 9600
+CODE        = 3       # 1..254
+
+import sys
+try:
+    import serial
+except ImportError:
+    print("Install pyserial: pip install pyserial", file=sys.stderr); raise
+
+ser = serial.Serial(SERIAL_PORT, BAUD, timeout=0.1)
+ser.write(bytes([CODE]))
+ser.close()
+print(f"[OK] Sent code {CODE} on {SERIAL_PORT} @ {BAUD}.")
+
+
